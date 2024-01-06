@@ -11,8 +11,13 @@ import java.util.*;
 
 @Service
 public class JavaQuestionService implements QuestionService {
-    Set<Question> questions = new HashSet<>();
-    Random random = new Random();
+    private final Set<Question> questions;
+    private final Random random;
+
+    public JavaQuestionService() {
+        this.questions = new HashSet<>();
+        this.random = new Random();
+    }
 
     @Override
     public Question add(String question, String answer) {
@@ -49,12 +54,13 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Collection<Question> getAll() {
-        return Collections.unmodifiableCollection(questions);
+        return Set.copyOf(questions);
     }
 
     @Override
     public Question getRandomQuestion() {
-        return (Question) questions.toArray()[random.nextInt(questions.size())];
+        Question[] q = questions.toArray(new Question[questions.size()]);
+        return q[random.nextInt(q.length)];
     }
 
     private void validateQuestionString(String question) {

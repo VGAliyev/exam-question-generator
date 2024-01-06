@@ -20,11 +20,11 @@ public class ExaminerServiceImpl implements ExaminerService {
     @Override
     public Collection<Question> getQuestions(int amount) {
         validateAmount(amount);
-        Set<Question> questionList = new HashSet<>();
+        Set<Question> questions = new HashSet<>();
         for (int i = 0; i < amount; i++) {
-            questionList.add(questionService.getRandomQuestion());
+            questions.add(questionService.getRandomQuestion());
         }
-        return questionList;
+        return Set.copyOf(questions);
     }
 
     private void validateAmount(int amount) {
