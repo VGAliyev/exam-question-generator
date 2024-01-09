@@ -16,57 +16,57 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static pro.sky.java.course2.valiyev.examquestiongenerator.Constants.TestConstants.*;
+import static pro.sky.java.course2.valiyev.examquestiongenerator.Constants.TestConstants.MATH_QUESTION;
 
 @ExtendWith(MockitoExtension.class)
-class JavaQuestionServiceTest {
+class MathQuestionServiceTest {
     @Mock
     private QuestionRepository questionRepository;
     @InjectMocks
-    private JavaQuestionService javaQuestionService;
+    private MathQuestionService mathQuestionService;
 
     @Test
     void shouldAddQuestionStringAnswerString() {
-        when(questionRepository.add(any())).thenReturn(JAVA_QUESTION);
-        assertEquals(JAVA_QUESTION, javaQuestionService.add("Java Question 1", "Java Answer 1"));
+        when(questionRepository.add(any())).thenReturn(MATH_QUESTION);
+        assertEquals(MATH_QUESTION, mathQuestionService.add("Math Question 1", "Math Answer 1"));
     }
 
     @Test
     void shouldAddQuestionStringNotValid() {
-        assertThrows(QuestionServiceQuestionStringNullException.class, () -> javaQuestionService.add(null, "Answer"));
+        assertThrows(QuestionServiceQuestionStringNullException.class, () -> mathQuestionService.add(null, "Answer"));
     }
 
     @Test
     void shouldAddAnswerStringNotValid() {
-        assertThrows(QuestionServiceAnswerNullException.class, () -> javaQuestionService.add("Question", null));
+        assertThrows(QuestionServiceAnswerNullException.class, () -> mathQuestionService.add("Question", null));
     }
 
     @Test
     void shouldAddQuestion() {
-        when(questionRepository.add(any())).thenReturn(JAVA_QUESTION);
-        assertEquals(JAVA_QUESTION, javaQuestionService.add(JAVA_QUESTION));
+        when(questionRepository.add(any())).thenReturn(MATH_QUESTION);
+        assertEquals(MATH_QUESTION, mathQuestionService.add(MATH_QUESTION));
     }
 
     @Test
     void shouldAddQuestionNotValid() {
-        assertThrows(QuestionServiceQuestionNullException.class, () -> javaQuestionService.add(null));
+        assertThrows(QuestionServiceQuestionNullException.class, () -> mathQuestionService.add(null));
     }
 
     @Test
     void remove() {
-        when(questionRepository.remove(any())).thenReturn(JAVA_QUESTION);
-        assertEquals(JAVA_QUESTION, javaQuestionService.remove(JAVA_QUESTION));
+        when(questionRepository.remove(any())).thenReturn(MATH_QUESTION);
+        assertEquals(MATH_QUESTION, mathQuestionService.remove(MATH_QUESTION));
     }
 
     @Test
     void getAll() {
-        when(questionRepository.getAll()).thenReturn(Set.of(JAVA_QUESTION));
-        assertEquals(Set.of(JAVA_QUESTION), javaQuestionService.getAll());
+        when(questionRepository.getAll()).thenReturn(Set.of(MATH_QUESTION));
+        assertEquals(Set.of(MATH_QUESTION), mathQuestionService.getAll());
     }
 
     @Test
     void getRandomQuestion() {
-        when(questionRepository.getAll()).thenReturn(List.of(JAVA_QUESTION));
-        assertEquals(JAVA_QUESTION, javaQuestionService.getRandomQuestion());
+        when(questionRepository.getAll()).thenReturn(List.of(MATH_QUESTION));
+        assertEquals(MATH_QUESTION, mathQuestionService.getRandomQuestion());
     }
 }

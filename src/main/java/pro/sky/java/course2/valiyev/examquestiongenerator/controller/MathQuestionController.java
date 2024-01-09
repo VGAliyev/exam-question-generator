@@ -10,12 +10,12 @@ import pro.sky.java.course2.valiyev.examquestiongenerator.service.QuestionServic
 
 import java.util.Collection;
 
-@RequestMapping("/exam/java")
+@RequestMapping("/exam/math")
 @RestController
-public class JavaQuestionController {
+public class MathQuestionController {
     QuestionService questionService;
 
-    public JavaQuestionController(@Qualifier("javaQuestionService") QuestionService questionService) {
+    public MathQuestionController(@Qualifier("mathQuestionService") QuestionService questionService) {
         this.questionService = questionService;
     }
 

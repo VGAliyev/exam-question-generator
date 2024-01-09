@@ -5,18 +5,20 @@ import pro.sky.java.course2.valiyev.examquestiongenerator.domain.Question;
 import pro.sky.java.course2.valiyev.examquestiongenerator.exception.QuestionServiceAnswerNullException;
 import pro.sky.java.course2.valiyev.examquestiongenerator.exception.QuestionServiceQuestionNullException;
 import pro.sky.java.course2.valiyev.examquestiongenerator.exception.QuestionServiceQuestionStringNullException;
-import pro.sky.java.course2.valiyev.examquestiongenerator.repository.Impl.JavaQuestionRepository;
+import pro.sky.java.course2.valiyev.examquestiongenerator.repository.Impl.MathQuestionRepository;
 import pro.sky.java.course2.valiyev.examquestiongenerator.repository.QuestionRepository;
 import pro.sky.java.course2.valiyev.examquestiongenerator.service.QuestionService;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Random;
 
 @Service
-public class JavaQuestionService implements QuestionService {
+public class MathQuestionService implements QuestionService {
+
     private final QuestionRepository questionRepository;
     private final Random random;
 
-    public JavaQuestionService(QuestionRepository questionRepository) {
+    public MathQuestionService(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
         this.random = new Random();
     }
