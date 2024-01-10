@@ -12,13 +12,12 @@ import java.util.*;
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
     private final Random random = new Random();
-    private final QuestionService questionService1;
-    private final QuestionService questionService2;
+    private final List<QuestionService> questionServiceList = new ArrayList<>();
 
     public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService questionService1,
                                @Qualifier("mathQuestionService") QuestionService questionService2) {
-        this.questionService1 = questionService1;
-        this.questionService2 = questionService2;
+        this.questionServiceList.add(questionService1);
+        this.questionServiceList.add(questionService2);
     }
 
     @Override
@@ -26,31 +25,23 @@ public class ExaminerServiceImpl implements ExaminerService {
         validateAmount(amount);
         Set<Question> questions = new HashSet<>();
 
-        // Random java answers and math answers
-        int javaAnswer, mathAnswer;
-        if (questionService1.getAll().size() > questionService2.getAll().size()) {
-            mathAnswer = (amount > questionService2.getAll().size()) ? random.nextInt(questionService2.getAll().size()) : random.nextInt(amount);
-            javaAnswer = Math.min((amount - mathAnswer), questionService1.getAll().size());
-        } else {
-            javaAnswer = (amount > questionService1.getAll().size()) ? random.nextInt(questionService1.getAll().size()) : random.nextInt(amount);
-            mathAnswer = Math.min((amount - javaAnswer), questionService2.getAll().size());
-        }
-        //-----------------------------------------
+        // Random java questions and math questions
+        int javaAmount, mathAmount;
+        javaAmount = (amount <= questionServiceList.get(0).getAll().size()) ?
+                random.nextInt(amount) : random.nextInt(questionServiceList.get(0).getAll().size());
+        mathAmount = amount - javaAmount;
 
-        for (int i = 0; i < javaAnswer; i++) {
-            questions.add(questionService1.getRandomQuestion());
+        for (int i = 0; i < javaAmount; i++) {
+            questions.add(questionServiceList.get(0).getRandomQuestion());
         }
-        for (int i = 0; i < mathAnswer; i++) {
-            questions.add(questionService2.getRandomQuestion());
+        for (int i = 0; i < mathAmount; i++) {
+            questions.add(questionServiceList.get(1).getRandomQuestion());
         }
 
         return Set.copyOf(questions);
     }
 
     private void validateAmount(int amount) {
-        if (amount > (questionService1.getAll().size() + questionService2.getAll().size())) {
-            throw new ExaminerServiceImplAmountOutOfRange("Amount should not be greater than the total number of questions!");
-        }
         if (amount <= 0) {
             throw new ExaminerServiceImplAmountOutOfRange("Amount must be greater than or equal to 1!");
         }
