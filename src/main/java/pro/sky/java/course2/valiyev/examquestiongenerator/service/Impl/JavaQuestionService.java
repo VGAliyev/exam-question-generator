@@ -5,7 +5,6 @@ import pro.sky.java.course2.valiyev.examquestiongenerator.domain.Question;
 import pro.sky.java.course2.valiyev.examquestiongenerator.exception.QuestionServiceAnswerNullException;
 import pro.sky.java.course2.valiyev.examquestiongenerator.exception.QuestionServiceQuestionNullException;
 import pro.sky.java.course2.valiyev.examquestiongenerator.exception.QuestionServiceQuestionStringNullException;
-import pro.sky.java.course2.valiyev.examquestiongenerator.repository.Impl.JavaQuestionRepository;
 import pro.sky.java.course2.valiyev.examquestiongenerator.repository.QuestionRepository;
 import pro.sky.java.course2.valiyev.examquestiongenerator.service.QuestionService;
 

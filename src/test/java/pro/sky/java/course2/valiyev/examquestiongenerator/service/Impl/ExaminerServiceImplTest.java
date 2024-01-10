@@ -32,6 +32,6 @@ class ExaminerServiceImplTest {
 
     @Test
     void getQuestionsAmountOutOfRange() {
-        assertThrows(ExaminerServiceImplAmountOutOfRange.class, () -> examinerService.getQuestions(1));
+        assertThrows(ExaminerServiceImplAmountOutOfRange.class, () -> examinerService.getQuestions(0));
     }
 }
