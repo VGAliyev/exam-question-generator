@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import pro.sky.java.course2.valiyev.examquestiongenerator.exception.MathQuestionServiceMethodNotAllowed;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static pro.sky.java.course2.valiyev.examquestiongenerator.Constants.TestConstants.MATH_QUESTION;
+import static pro.sky.java.course2.valiyev.examquestiongenerator.Constants.TestConstants.MATH_QUESTION_1;
 
 class MathQuestionServiceTest {
     private MathQuestionService mathQuestionService;
@@ -22,12 +22,12 @@ class MathQuestionServiceTest {
 
     @Test
     void shouldAddQuestion() {
-        assertThrows(MathQuestionServiceMethodNotAllowed.class, () -> mathQuestionService.add(MATH_QUESTION));
+        assertThrows(MathQuestionServiceMethodNotAllowed.class, () -> mathQuestionService.add(MATH_QUESTION_1));
     }
 
     @Test
     void remove() {
-        assertThrows(MathQuestionServiceMethodNotAllowed.class, () -> mathQuestionService.remove(MATH_QUESTION));
+        assertThrows(MathQuestionServiceMethodNotAllowed.class, () -> mathQuestionService.remove(MATH_QUESTION_1));
     }
 
     @Test
@@ -37,7 +37,7 @@ class MathQuestionServiceTest {
 
     @Test
     void getRandomQuestion() {
-        assertEquals(MATH_QUESTION.getClass(), mathQuestionService.getRandomQuestion().getClass());
+        assertEquals(MATH_QUESTION_1.getClass(), mathQuestionService.getRandomQuestion().getClass());
         assertNotNull(mathQuestionService.getRandomQuestion().getQuestion());
         assertNotNull(mathQuestionService.getRandomQuestion().getAnswer());
     }
