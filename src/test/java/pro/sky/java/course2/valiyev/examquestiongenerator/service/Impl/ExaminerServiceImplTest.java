@@ -25,9 +25,9 @@ class ExaminerServiceImplTest {
 
     @Test
     void getQuestions() {
-        when(questionService.getRandomQuestion()).thenReturn(JAVA_QUESTION);
+        when(questionService.getRandomQuestion()).thenReturn(JAVA_QUESTION_1);
         when(questionService.getAll()).thenReturn(QUESTIONS);
-        assertIterableEquals(new HashSet<>(Set.of(JAVA_QUESTION)), examinerService.getQuestions(1));
+        assertIterableEquals(new HashSet<>(Set.of(JAVA_QUESTION_1)), examinerService.getQuestions(1));
     }
 
     @Test

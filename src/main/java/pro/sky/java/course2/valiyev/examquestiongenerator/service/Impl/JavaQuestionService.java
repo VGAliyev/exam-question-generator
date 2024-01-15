@@ -60,8 +60,7 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question getRandomQuestion() {
-        Question[] q = questionRepository.getAll().toArray(new Question[questionRepository.getAll().size()]);
-        return q[random.nextInt(q.length)];
+        return questionRepository.getAll().stream().toList().get(random.nextInt(questionRepository.getAll().size()));
     }
 
     private void validateQuestionString(String question) {

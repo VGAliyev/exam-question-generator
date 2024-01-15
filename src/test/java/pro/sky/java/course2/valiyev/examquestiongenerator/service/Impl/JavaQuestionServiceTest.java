@@ -5,12 +5,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import pro.sky.java.course2.valiyev.examquestiongenerator.domain.Question;
 import pro.sky.java.course2.valiyev.examquestiongenerator.exception.QuestionServiceAnswerNullException;
 import pro.sky.java.course2.valiyev.examquestiongenerator.exception.QuestionServiceQuestionNullException;
 import pro.sky.java.course2.valiyev.examquestiongenerator.exception.QuestionServiceQuestionStringNullException;
 import pro.sky.java.course2.valiyev.examquestiongenerator.repository.QuestionRepository;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,8 +28,8 @@ class JavaQuestionServiceTest {
 
     @Test
     void shouldAddQuestionStringAnswerString() {
-        when(questionRepository.add(any())).thenReturn(JAVA_QUESTION);
-        assertEquals(JAVA_QUESTION, javaQuestionService.add("Java Question 1", "Java Answer 1"));
+        when(questionRepository.add(any())).thenReturn(JAVA_QUESTION_1);
+        assertEquals(JAVA_QUESTION_1, javaQuestionService.add("Java Question 1", "Java Answer 1"));
     }
 
     @Test
@@ -43,8 +44,8 @@ class JavaQuestionServiceTest {
 
     @Test
     void shouldAddQuestion() {
-        when(questionRepository.add(any())).thenReturn(JAVA_QUESTION);
-        assertEquals(JAVA_QUESTION, javaQuestionService.add(JAVA_QUESTION));
+        when(questionRepository.add(any())).thenReturn(JAVA_QUESTION_1);
+        assertEquals(JAVA_QUESTION_1, javaQuestionService.add(JAVA_QUESTION_1));
     }
 
     @Test
@@ -54,19 +55,27 @@ class JavaQuestionServiceTest {
 
     @Test
     void remove() {
-        when(questionRepository.remove(any())).thenReturn(JAVA_QUESTION);
-        assertEquals(JAVA_QUESTION, javaQuestionService.remove(JAVA_QUESTION));
+        when(questionRepository.remove(any())).thenReturn(JAVA_QUESTION_1);
+        assertEquals(JAVA_QUESTION_1, javaQuestionService.remove(JAVA_QUESTION_1));
     }
 
     @Test
     void getAll() {
-        when(questionRepository.getAll()).thenReturn(Set.of(JAVA_QUESTION));
-        assertEquals(Set.of(JAVA_QUESTION), javaQuestionService.getAll());
+        when(questionRepository.getAll()).thenReturn(Set.of(JAVA_QUESTION_1));
+        assertEquals(Set.of(JAVA_QUESTION_1), javaQuestionService.getAll());
     }
 
     @Test
     void getRandomQuestion() {
-        when(questionRepository.getAll()).thenReturn(List.of(JAVA_QUESTION));
-        assertEquals(JAVA_QUESTION, javaQuestionService.getRandomQuestion());
+        Set<Question> questions = new HashSet<>();
+        int amount = 2;
+        questions = Set.of(
+                JAVA_QUESTION_1,
+                JAVA_QUESTION_2,
+                MATH_QUESTION_1,
+                MATH_QUESTION_2
+        );
+        when(questionRepository.getAll()).thenReturn(questions);
+        assertEquals(JAVA_QUESTION_1, javaQuestionService.getRandomQuestion());
     }
 }
